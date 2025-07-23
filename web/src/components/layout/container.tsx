@@ -24,7 +24,7 @@ const Container: React.FC<ContainerProps> = ({
   return (
     <div
       className={cn(
-        'w-full px-4 sm:px-6',
+        'w-full px-6 sm:px-8 md:px-6',
         sizeClasses[size],
         center && 'mx-auto',
         className

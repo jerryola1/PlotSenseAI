@@ -10,7 +10,7 @@ export const APP_ROUTES = {
 //external links
 export const EXTERNAL_LINKS = {
   BINDER_DEMO: 'https://mybinder.org/v2/gh/jerryola1/PlotSenseAI/main?labpath=notebooks%2Fgetting-started.ipynb',
-  GITHUB_REPO: 'https://github.com/jerryola1/PlotSenseAI',
+  GITHUB_REPO: 'https://github.com/christianchimezie/PlotSenseAI',
   PYPI_PACKAGE: 'https://pypi.org/project/plotsense/',
   GROQ_API_KEYS: 'https://console.groq.com/keys',
 } as const;

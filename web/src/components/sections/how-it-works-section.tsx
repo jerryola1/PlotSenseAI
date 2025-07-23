@@ -2,6 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui';
 import Container from '@/components/layout/container';
 import { EXTERNAL_LINKS } from '@/constants';
+import { motion } from 'framer-motion';
 
 interface Step {
   number: string;
@@ -37,7 +38,7 @@ const steps: Step[] = [
   {
     number: '03',
     title: 'generate matplotlib plots',
-    description: 'use ps.plotgen(df, suggestions) to create publication-ready matplotlib figures. supports customization and returns figure objects for further modification.',
+    description: 'use ps.plotgen(df, suggestions) to create professional matplotlib figures. supports customization and returns figure objects for further modification.',
     color: 'from-green-500 to-green-600',
     icon: (
       <svg className="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -62,10 +63,22 @@ const HowItWorksSection: React.FC = () => {
   return (
     <section className="py-20 bg-white dark:bg-gray-800">
       <Container>
-        <div className="text-center mb-16 animate-fade-in">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-sm font-medium mb-4">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: -50, rotateX: 45 }}
+          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+          transition={{ duration: 1.2, type: "spring", stiffness: 60 }}
+          viewport={{ once: true }}
+        >
+          <motion.div 
+            className="inline-flex items-center px-4 py-2 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-sm font-medium mb-4"
+            initial={{ scale: 0, rotate: 360 }}
+            whileInView={{ scale: 1, rotate: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 150 }}
+            viewport={{ once: true }}
+          >
             how it works
-          </div>
+          </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
             from dataframe to insights in
             <span className="block text-blue-600 dark:text-blue-400">4 simple steps</span>
@@ -74,92 +87,257 @@ const HowItWorksSection: React.FC = () => {
             plotsense integrates seamlessly with your existing python data science workflow, 
             making ai-powered visualization accessible to all skill levels.
           </p>
-        </div>
+        </motion.div>
 
-        {/* steps grid */}
-        <div className="grid lg:grid-cols-4 gap-8 mb-16">
-          {steps.map((step, index) => (
-            <div key={index} className="relative animate-fade-in" style={{ animationDelay: `${index * 0.2}s` }}>
-              {/* connector line */}
-              {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 left-full w-full h-0.5 bg-gradient-to-r from-gray-200 to-transparent dark:from-gray-600 transform -translate-y-1/2 z-0">
-                  <div className="absolute right-0 top-1/2 w-2 h-2 bg-gray-300 dark:bg-gray-600 rounded-full transform -translate-y-1/2"></div>
-                </div>
-              )}
+        {/* workflow steps with connecting lines */}
+        <div className="relative mb-16">
+          {/* desktop horizontal flow */}
+          <div className="hidden lg:block">
+            <div className="grid lg:grid-cols-4 gap-8 relative">
+              {/* connecting line background */}
+              <div className="absolute top-24 left-16 right-16 h-0.5 bg-gray-200 dark:bg-gray-700 z-0"></div>
               
-              <Card className="relative z-10 group hover:shadow-lg transition-all duration-300 border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500/20 dark:hover:border-blue-400/20 bg-white dark:bg-gray-800">
-                <CardContent className="p-8 text-center">
-                  <div className="space-y-6">
-                    {/* step number */}
-                    <div className="relative">
-                      <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${step.color} text-white font-bold text-xl mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                        {step.number}
-                      </div>
-                    </div>
+              {steps.map((step, index) => (
+                <motion.div 
+                  key={index} 
+                  className="relative"
+                  initial={{ 
+                    opacity: 0, 
+                    y: 100,
+                    scale: 0.5,
+                    rotateX: 90
+                  }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    y: 0,
+                    scale: 1,
+                    rotateX: 0
+                  }}
+                  transition={{ 
+                    duration: 0.8, 
+                    delay: index * 0.3,
+                    type: "spring",
+                    stiffness: 80,
+                    damping: 15
+                  }}
+                  viewport={{ once: true }}
+                >
+                  {/* step node */}
+                  <div className="relative z-10 flex flex-col items-center">
+                    <motion.div 
+                      className={`w-16 h-16 rounded-full bg-gradient-to-r ${step.color} flex items-center justify-center text-white font-bold text-lg shadow-lg mb-4`}
+                      whileHover={{ 
+                        scale: 1.2,
+                        rotate: 10,
+                        boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+                        transition: { duration: 0.3 }
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {step.number}
+                    </motion.div>
                     
-                    {/* icon */}
-                    <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-r ${step.color} text-white`}>
+                    <motion.div 
+                      className={`w-10 h-10 rounded-lg bg-gradient-to-r ${step.color} flex items-center justify-center text-white mb-4 shadow-md`}
+                      whileHover={{ 
+                        scale: 1.1,
+                        rotate: -5,
+                        transition: { duration: 0.2 }
+                      }}
+                    >
                       {step.icon}
-                    </div>
+                    </motion.div>
                     
-                    {/* content */}
-                    <div className="space-y-3">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 capitalize">
+                    <div className="text-center space-y-2">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 capitalize">
                         {step.title}
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm">
+                      <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed max-w-xs">
                         {step.description}
                       </p>
                     </div>
+                    
+                    {/* arrow connector */}
+                    {index < steps.length - 1 && (
+                      <motion.div 
+                        className="absolute top-8 -right-4 z-20"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, delay: index * 0.3 + 0.5 }}
+                        viewport={{ once: true }}
+                      >
+                        <svg className="w-8 h-8 text-gray-400 dark:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                      </motion.div>
+                    )}
                   </div>
-                </CardContent>
-              </Card>
+                </motion.div>
+              ))}
             </div>
-          ))}
+          </div>
+          
+          {/* mobile vertical flow */}
+          <div className="lg:hidden space-y-8">
+            {steps.map((step, index) => (
+              <motion.div 
+                key={index} 
+                className="relative"
+                initial={{ 
+                  opacity: 0, 
+                  x: index % 2 === 0 ? -50 : 50,
+                  rotateZ: index % 2 === 0 ? -10 : 10
+                }}
+                whileInView={{ 
+                  opacity: 1, 
+                  x: 0,
+                  rotateZ: 0
+                }}
+                transition={{ 
+                  duration: 0.7, 
+                  delay: index * 0.2,
+                  type: "spring",
+                  stiffness: 100
+                }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="flex flex-col items-center">
+                    <motion.div 
+                      className={`w-12 h-12 rounded-full bg-gradient-to-r ${step.color} flex items-center justify-center text-white font-bold shadow-lg`}
+                      whileHover={{ scale: 1.15, rotate: 5 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      {step.number}
+                    </motion.div>
+                    {index < steps.length - 1 && (
+                      <motion.div 
+                        className="w-0.5 h-16 bg-gray-200 dark:bg-gray-700 mt-4"
+                        initial={{ height: 0 }}
+                        whileInView={{ height: "4rem" }}
+                        transition={{ duration: 0.8, delay: index * 0.2 + 0.5 }}
+                        viewport={{ once: true }}
+                      ></motion.div>
+                    )}
+                  </div>
+                  
+                  <div className="flex-1 pt-2">
+                    <motion.div 
+                      className={`w-8 h-8 rounded-lg bg-gradient-to-r ${step.color} flex items-center justify-center text-white mb-3 shadow-md`}
+                      whileHover={{ scale: 1.1, rotate: -5 }}
+                    >
+                      {step.icon}
+                    </motion.div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 capitalize mb-2">
+                      {step.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* demo section */}
-        <div className="bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-800 dark:to-blue-900/20 rounded-3xl p-8 lg:p-12 text-center animate-fade-in">
+        <motion.div 
+          className="bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-800 dark:to-blue-900/20 rounded-3xl p-8 lg:p-12 text-center"
+          initial={{ 
+            opacity: 0, 
+            scale: 0.8,
+            rotateX: -20,
+            y: 100
+          }}
+          whileInView={{ 
+            opacity: 1, 
+            scale: 1,
+            rotateX: 0,
+            y: 0
+          }}
+          transition={{ 
+            duration: 1, 
+            type: "spring",
+            stiffness: 70,
+            damping: 15
+          }}
+          viewport={{ once: true }}
+        >
           <div className="max-w-2xl mx-auto space-y-6">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-sm font-medium">
+            <motion.div 
+              className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-sm font-medium"
+              initial={{ scale: 0, rotate: -180 }}
+              whileInView={{ scale: 1, rotate: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, type: "spring", stiffness: 120 }}
+              viewport={{ once: true }}
+            >
               see it in action
-            </div>
+            </motion.div>
             
-            <h3 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+            <motion.h3 
+              className="text-3xl font-bold text-gray-900 dark:text-gray-100"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              viewport={{ once: true }}
+            >
               ready to enhance your data analysis?
-            </h3>
+            </motion.h3>
             
-            <p className="text-lg text-gray-600 dark:text-gray-300">
+            <motion.p 
+              className="text-lg text-gray-600 dark:text-gray-300"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              viewport={{ once: true }}
+            >
               join data scientists and researchers who use plotsense to accelerate 
               their exploratory data analysis with ai-powered insights.
-            </p>
+            </motion.p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button 
-                size="lg" 
-                className="px-8 py-4 text-lg font-semibold"
-                onClick={() => window.open(EXTERNAL_LINKS.BINDER_DEMO + '?utm_source=website&utm_medium=how_it_works&utm_campaign=try_now', '_blank')}
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 justify-center pt-4"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.9, type: "spring", stiffness: 100 }}
+              viewport={{ once: true }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.05, rotate: 1 }}
+                whileTap={{ scale: 0.95 }}
               >
-                try it now
-                <svg className="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2M7 17l3-3m0 0l3-3m-3 3h12" />
-                </svg>
-              </Button>
+                <Button 
+                  size="lg" 
+                  className="px-8 py-4 text-lg font-semibold"
+                  onClick={() => window.open(EXTERNAL_LINKS.BINDER_DEMO + '?utm_source=website&utm_medium=how_it_works&utm_campaign=try_now', '_blank')}
+                >
+                  try it now
+                  <svg className="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2M7 17l3-3m0 0l3-3m-3 3h12" />
+                  </svg>
+                </Button>
+              </motion.div>
               
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="px-8 py-4 text-lg font-semibold"
-                onClick={() => window.open(EXTERNAL_LINKS.GITHUB_REPO + '?utm_source=website&utm_medium=how_it_works&utm_campaign=view_examples', '_blank')}
+              <motion.div
+                whileHover={{ scale: 1.05, rotate: -1 }}
+                whileTap={{ scale: 0.95 }}
               >
-                view examples
-                <svg className="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                </svg>
-              </Button>
-            </div>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="px-8 py-4 text-lg font-semibold"
+                  onClick={() => window.open(EXTERNAL_LINKS.GITHUB_REPO + '?utm_source=website&utm_medium=how_it_works&utm_campaign=view_examples', '_blank')}
+                >
+                  view examples
+                  <svg className="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                </Button>
+              </motion.div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </Container>
     </section>
   );

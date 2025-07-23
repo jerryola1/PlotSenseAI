@@ -1,8 +1,7 @@
 import { HomepageLayout } from '@/components/layout';
 import { 
   HeroSection, 
-  FeaturesSection, 
-  HowItWorksSection, 
+  SimulationSection, 
   StatsSection 
 } from '@/components/sections';
 
@@ -12,11 +11,8 @@ function App() {
       {/* hero section */}
       <HeroSection />
       
-      {/* features section */}
-      <FeaturesSection />
-      
-      {/* how it works section */}
-      <HowItWorksSection />
+      {/* simulation section with real examples */}
+      <SimulationSection />
       
       {/* stats and testimonials section */}
       <StatsSection />

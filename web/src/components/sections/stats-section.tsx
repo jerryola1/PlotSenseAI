@@ -1,6 +1,7 @@
 import Container from '@/components/layout/container';
 import { Button } from '@/components/ui';
 import { EXTERNAL_LINKS } from '@/constants';
+import { motion } from 'framer-motion';
 
 interface Stat {
   number: string;
@@ -85,55 +86,119 @@ const StatsSection: React.FC = () => {
       <Container className="relative z-10">
         {/* stats grid */}
         <div className="mb-20">
-          <div className="text-center mb-16 animate-fade-in">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, clipPath: "circle(0% at 50% 50%)" }}
+            whileInView={{ opacity: 1, clipPath: "circle(150% at 50% 50%)" }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            viewport={{ once: true }}
+          >
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 backdrop-blur-sm border border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300 text-sm font-medium mb-4">
               trusted by professionals
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
               join the data visualization
               <span className="block text-blue-600 dark:text-blue-400">
                 revolution
               </span>
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {stats.map((stat, index) => (
-              <div 
+              <motion.div 
                 key={index} 
-                className="text-center group animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="text-center group"
+                initial={{ 
+                  opacity: 0, 
+                  scale: 0,
+                  rotate: 180
+                }}
+                whileInView={{ 
+                  opacity: 1, 
+                  scale: 1,
+                  rotate: 0
+                }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: index * 0.15,
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 10
+                }}
+                viewport={{ once: true }}
+                whileHover={{ 
+                  scale: 1.1, 
+                  rotate: 5,
+                  transition: { duration: 0.2 }
+                }}
               >
                 <div className="space-y-4">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 rounded-2xl text-white group-hover:scale-110 transition-transform duration-300">
                     {stat.icon}
                   </div>
                   <div className="space-y-2">
-                    <div className="text-4xl md:text-5xl font-bold text-blue-600 dark:text-blue-400">
+                    <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-blue-600 dark:text-blue-400">
                       {stat.number}
                     </div>
-                    <div className="text-xl font-semibold capitalize text-gray-900 dark:text-gray-100">{stat.label}</div>
-                    <div className="text-gray-600 dark:text-gray-300 text-sm">{stat.description}</div>
+                    <div className="text-base sm:text-lg md:text-xl font-semibold capitalize text-gray-900 dark:text-gray-100">{stat.label}</div>
+                    <div className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm">{stat.description}</div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
 
         {/* testimonials */}
-        <div className="animate-fade-in">
-          <div className="text-center mb-12">
+        <motion.div
+          initial={{ opacity: 0, rotateX: 30, scale: 0.9 }}
+          whileInView={{ opacity: 1, rotateX: 0, scale: 1 }}
+          transition={{ duration: 1, type: "spring", stiffness: 80 }}
+          viewport={{ once: true }}
+        >
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, z: -100 }}
+            whileInView={{ opacity: 1, z: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
             <h3 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">what data professionals say</h3>
             <p className="text-gray-600 dark:text-gray-300 text-lg">experiences from researchers and data scientists using plotsense</p>
-          </div>
+          </motion.div>
 
           <div className="grid lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div 
+              <motion.div 
                 key={index} 
-                className="bg-white dark:bg-gray-800 backdrop-blur-sm rounded-2xl p-8 border border-gray-200 dark:border-gray-700 group hover:shadow-lg transition-all duration-300 animate-slide-in-left"
-                style={{ animationDelay: `${index * 0.2}s` }}
+                className="bg-white dark:bg-gray-800 backdrop-blur-sm rounded-2xl p-8 border border-gray-200 dark:border-gray-700 group hover:shadow-lg transition-all duration-300"
+                initial={{ 
+                  opacity: 0, 
+                  rotateY: index % 2 === 0 ? -30 : 30,
+                  scale: 0.7,
+                  z: -50
+                }}
+                whileInView={{ 
+                  opacity: 1, 
+                  rotateY: 0,
+                  scale: 1,
+                  z: 0
+                }}
+                transition={{ 
+                  duration: 0.9, 
+                  delay: index * 0.2,
+                  type: "spring",
+                  stiffness: 70,
+                  damping: 12
+                }}
+                viewport={{ once: true }}
+                whileHover={{ 
+                  y: -8,
+                  rotateY: 5,
+                  scale: 1.02,
+                  transition: { duration: 0.3 }
+                }}
               >
                 <div className="space-y-6">
                   <div className="text-lg italic text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -150,36 +215,11 @@ const StatsSection: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* bottom cta */}
-        <div className="mt-20 text-center animate-fade-in">
-          <div className="bg-blue-50 dark:bg-gray-800 backdrop-blur-sm rounded-3xl p-8 lg:p-12 border border-blue-100 dark:border-gray-700">
-            <div className="max-w-3xl mx-auto space-y-6">
-              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100">
-                ready to enhance your python workflow?
-              </h3>
-              <p className="text-xl text-gray-600 dark:text-gray-300">
-                get started with plotsense and add ai-powered visualization intelligence to your data science toolkit
-              </p>
-              <div className="pt-4">
-                <Button 
-                  size="lg" 
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg font-semibold"
-                  onClick={() => window.open(EXTERNAL_LINKS.BINDER_DEMO + '?utm_source=website&utm_medium=stats_section&utm_campaign=get_started', '_blank')}
-                >
-                  get started now
-                  <svg className="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2M7 17l3-3m0 0l3-3m-3 3h12" />
-                  </svg>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
       </Container>
     </section>
   );

@@ -32,7 +32,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
         
         <main
           className={cn(
-            'flex-1 overflow-auto',
+            'flex-1 overflow-auto pt-16',
             showSidebar && 'transition-all duration-300'
           )}
         >

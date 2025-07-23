@@ -22,8 +22,8 @@ const HomepageLayout: React.FC<HomepageLayoutProps> = ({
   }, []);
 
   return (
-    <div className={cn('min-h-screen flex flex-col bg-background', className)}>
-      <Header className="bg-transparent absolute top-0 left-0 right-0 z-50 border-none" />
+    <div className={cn('min-h-screen flex flex-col bg-white dark:bg-gray-900', className)}>
+      <Header />
       
       <main className="flex-1">
         {children}
