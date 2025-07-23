@@ -1,6 +1,4 @@
 import Container from '@/components/layout/container';
-import { Button } from '@/components/ui';
-import { EXTERNAL_LINKS } from '@/constants';
 import { motion } from 'framer-motion';
 
 interface Stat {

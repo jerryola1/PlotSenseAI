@@ -1,4 +1,3 @@
-import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui';
 import Container from '@/components/layout/container';
 import { EXTERNAL_LINKS } from '@/constants';
