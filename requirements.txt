@@ -1,15 +1,11 @@
-# This file is used to install the required packages for the project.
-seaborn
-matplotlib
-pandas
-numpy
-pytest
-python-dotenv
-ipykernel
+# binder requirements for plotsense demo
+plotsense
 groq
-requests
-setuptools
-jupyter
+python-dotenv
 matplotlib>=3.8.0
-pytest-cov
-pytest-mock
+seaborn>=0.11
+pandas>=1.0
+numpy
+scipy
+scikit-learn
+jupyter
