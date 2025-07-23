@@ -55,21 +55,21 @@ const stats: Stat[] = [
 const testimonials = [
   {
     quote: "plotsense accelerates our exploratory data analysis. the ensemble ai recommendations help us discover visualization patterns we might have missed.",
-    author: "dr. alex chen",
+    author: "dr. james ademoye",
     role: "data scientist & researcher",
-    avatar: "AC",
+    avatar: "JA",
   },
   {
     quote: "the natural language explanations are perfect for communicating insights to stakeholders. saves hours of documentation work.",
-    author: "jordan smith",
+    author: "chike isaac",
     role: "machine learning engineer",
-    avatar: "JS",
+    avatar: "CI",
   },
   {
     quote: "integrates seamlessly with our jupyter notebook workflow. the matplotlib figure output makes customization easy.",
-    author: "sam wilson",
+    author: "laura durk",
     role: "data analyst",
-    avatar: "SW",
+    avatar: "LD",
   },
 ];
 
