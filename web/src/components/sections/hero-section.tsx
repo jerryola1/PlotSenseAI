@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui';
 import Container from '@/components/layout/container';
-import { env } from '@/config/env';
 import { EXTERNAL_LINKS } from '@/constants';
 
 const HeroSection: React.FC = () => {

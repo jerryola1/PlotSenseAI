@@ -1,7 +1,8 @@
 import { cn } from '@/lib/utils';
-import type { BaseComponent } from '@/types';
 
-interface ContainerProps extends BaseComponent {
+interface ContainerProps {
+  children?: React.ReactNode;
+  className?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
   center?: boolean;
 }

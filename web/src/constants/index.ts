@@ -47,7 +47,7 @@ export const UI_MESSAGES = {
 //file upload constants
 export const FILE_CONFIG = {
   MAX_SIZE: 10 * 1024 * 1024, // 10mb
-  ACCEPTED_TYPES: ['.csv', '.json', '.xlsx'],
+  ACCEPTED_TYPES: ['.csv', '.json', '.xlsx'] as string[],
   ACCEPTED_MIME_TYPES: [
     'text/csv',
     'application/json',
